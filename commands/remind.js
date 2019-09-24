@@ -58,8 +58,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       //console.log(`Message sent to ${msg2.author.id}`);
     }, returntime);
   },
-  //rand
-
   
   exports.conf = {
     enabled: true,

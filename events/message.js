@@ -1,7 +1,3 @@
-// The MESSAGE event runs anytime a message is received
-// Note that due to the binding of client to every event, every event
-// goes `client, other, args` when this function is run.
-
 module.exports = async (client, message) => {
   // It's good practice to ignore other bots. This also makes your bot ignore itself
   // and not get into a spam loop (we call that "botception").
@@ -20,23 +16,11 @@ module.exports = async (client, message) => {
     return message.reply(`siema :D`)
   }
 
-
-
-  // Here we separate our "command" name, and our "arguments" for the command.
-  // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
-  // command = say
-  // args = ["Is", "this", "the", "real", "life?"]
  const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
  //console.log(args);
   const command = args.shift().toLowerCase();
-  //console.log(args);
-
-  // If the member on a guild is invisible or not cached, fetch them.
   if (message.guild && !message.member) await message.guild.fetchMember(message.author);
 
-  // Get the user or member's permission level from the elevation
-    // Also good practice to ignore any message that does not start with our prefix,
-  // which is set in the configuration file.
   sql.get(`SELECT * FROM user WHERE userId =${message.author.id}`).then(row => {
     if (!row) {
       sql.run(`INSERT INTO user (userId, reputation, repDate, creditsDate, userInfo, credits) VALUES (?, ?, ?, ?, ?, ?)`, 
@@ -74,24 +58,6 @@ module.exports = async (client, message) => {
   // and clean way to grab one of 2 values!
   if (!cmd) return;
 
-  // Some commands may not be useable in DMs. This check prevents those commands from running
-  // and return a friendly error message.
-  /*
-  if (cmd && !message.guild && cmd.conf.guildOnly)
-    return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
-
-  if (level < client.levelCache[cmd.conf.permLevel]) {
-    if (settings.systemNotice === "true") {
-      return message.channel.send(`You do not have permission to use this command.
-  Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
-  This command requires level ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel})`);
-    } else {
-      return;
-    }
-  }*/
-
-  // To simplify message arguments, the author's level is now put on level (not member so it is supported in DMs)
-  // The "level" command module argument will be deprecated in the future.
   message.author.permLevel = level;
   //console.log(args) 
  /* message.flags = [];

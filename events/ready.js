@@ -68,8 +68,6 @@ module.exports = async client => {
     FOREIGN KEY(guildId) REFERENCES guild(guildId)) without rowid`
     );
   
-  // Make the bot "play the game" which is the help command with default prefix.
-  //client.user.setActivity(`${client.config.defaultSettings.prefix}help`, {type: "PLAYING"});
   client.user.setActivity(`${client.config.defaultSettings.prefix}help || ${client.config.defaultSettings.prefix}invite`, {type: "PLAYING"});
   client.user.setStatus("dnd");
 };

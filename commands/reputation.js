@@ -10,14 +10,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     const x = 360;
     let dif = x+1
     let a1 = args[0]
-    //console.log(msg2)
-    //console.log(args)
-   /* try {
-      y = msg2[1].substring(0, (msg2[1].length));
-    } catch(error) {
-      y = 1;
-    }
-    */
+
     if (args[0] == '-') {
       y = '-'
       args.shift().slice(1)
@@ -26,7 +19,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
       args.shift().slice(1)
     }
     let mention
-    //console.log(`args[0], ${args[0]}`)
     if (msg.mentions.users.first()) {
       mention =  msg.mentions.users.first();
     } else if (args[0] != null) {
@@ -45,15 +37,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         let fuse = new Fuse(membersArray, options)
         const nameSearch = args.join(` `)
         var result = fuse.search(nameSearch);
-        //result
-        //console.log(result[0])
-        //mention = message.guild.members.filter(m=>m.user.id==result[0].id)
         mention = message.guild.members.get(result[0].id).user
         console.log(mention)
-        //console.log(result[0].id)
-        //console.log("mention.id");
-        //console.log(mention);
-        
       })
     }
     sql.get(`SELECT * FROM user WHERE userId="${msg.author.id}"`).then(row => {
@@ -69,8 +54,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
     else {
       if (mention == null || mention == undefined) {
-        //console.log("no elo")
-        //console.log(mention)
         msg.reply(`Stan Twojej reputacji: **${row.reputation}**, możesz już ją przydzielić`);
       } else if (mention.id == msg.author.id) {
         msg.reply(`Stan Twojej reputacji: **${row.reputation}**, możesz ją przydzielić komuś **fajnemu**`);
@@ -105,11 +88,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 
       }
     }
-
-
-    // console.log(dif);
-     //console.log(msg.createdTimestamp);
-     //console.log(row.repDate);
 
    });
   },

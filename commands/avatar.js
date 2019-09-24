@@ -1,22 +1,11 @@
-// The EVAL command will execute **ANY** arbitrary javascript code given to it.
-// THIS IS PERMISSION LEVEL 10 FOR A REASON! It's perm level 10 because eval
-// can be used to do **anything** on your machine, from stealing information to
-// purging the hard drive. DO NOT LET ANYONE ELSE USE THIS
-
-
-// However it's, like, super ultra useful for troubleshooting and doing stuff
-// you don't want to put in a command.
 const Discord = require("discord.js");
-//const Embed = new Discord.RichEmbed()
 const Fuse = require("fuse.js")
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
 	if(message.author.id=="519141748325482506"){
 	return message.reply(";)")
 		
 	}
-    //let embed = new Discord.RichEmbed()
     if(message.mentions.members.first()) {
-        //let avatar = new Discord.RichEmbed()
     var embed = new Discord.RichEmbed()
     .setTitle(`${message.mentions.members.first().user.username}#${message.mentions.members.first().user.discriminator}`)
     .setAuthor(message.author.username, message.author.avatarURL)
@@ -25,10 +14,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     .setColor(client.config.embed_color_h)
     message.channel.send(embed);
     return
-
-        //return message.channel.send(embed)
-        //message.channel.send(message.mentions.members.first().user.avatarURL); 
-        
       }
       if (args != '') {
         console.log("no jestem tu")
@@ -57,8 +42,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
             message.channel.send(embed);
             return
 
-            //message.channel.send(result[0].avatarURL);
-
           } catch (err) {
             var embed = new Discord.RichEmbed()
             .setTitle(`${message.author.username}#${message.author.discriminator}`)
@@ -68,7 +51,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
             .setColor(client.config.embed_color_h)
             message.channel.send(embed);
           }
-          
         }) 
       }
       else {
@@ -81,8 +63,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
             message.channel.send(embed);
         }
       },
-    //boht info
-
   
   exports.conf = {
     enabled: true,
